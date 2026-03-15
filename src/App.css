@@ -1,0 +1,98 @@
+#root {
+  margin: auto;
+  width: 100%;
+}
+
+
+h1,h2{
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 0.9;
+}
+
+
+h1{
+  font-size: clamp(4rem,10rem,15rem);
+}
+
+h2{
+  font-size: clamp(2.5rem,0.5rem,3rem);
+  width: 75%;
+}
+
+p{
+  font-size: 1.125rem;
+  font-weight: 400;
+}
+
+.hero{
+  position: relative;
+  width: 100%;
+  height: 175svh ;
+  color: rgb(132, 109, 38);
+  overflow: hidden;
+  background-color: #2a2a2a;
+  background-image: url(/bg.svg);
+}
+
+.hero-img{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+}
+
+.hero-header{
+  position: absolute;
+  width: 100%;
+  height: 100svh;
+  display: flex;
+  top: 0;
+  left: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  gap: 0.5rem;
+  z-index: 100;
+
+}
+
+.hero-header p{
+  width: 75%;
+}
+
+.hero-content{
+  position: absolute;
+  bottom: 0;
+  height: 75svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  
+}
+
+.hero-content h2{
+  width: 75;
+  color: rgb(31, 32, 32);
+}
+
+.about{
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #ebf5df;
+  color: #2a2a2a;
+}
+
+.about p{
+  width: 400px;
+  text-align: center;
+}
+
