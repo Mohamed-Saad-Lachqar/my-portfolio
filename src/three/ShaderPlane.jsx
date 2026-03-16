@@ -10,7 +10,7 @@ function ShaderPlane({ resolution ,progress  }) {
   const uniforms = useMemo(() => ({
     uProgress: { value: 0 },
     uResolution: { value: new THREE.Vector2(resolution.width, resolution.height) },
-    uColor: { value: new THREE.Vector3(235 / 255, 245 / 255, 223 / 255) },
+    uColor: { value: new THREE.Vector3(238 / 255, 238 / 255, 238 / 255) },
     uSpread: { value: 1.2 }
   }), [])
 
