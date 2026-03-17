@@ -1,13 +1,12 @@
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Environment, CameraControls, PerspectiveCamera, OrbitControls,OrthographicCamera} from '@react-three/drei'
+import { Canvas } from '@react-three/fiber'
 import ShaderPlane from "../three/ShaderPlane"
 import SvgBackground from '../components/SvgBackground'
 import head from "../assets/head.png";
-
 import { useEffect, useRef, useState } from "react"
 import Lenis from "lenis"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import ScrollTextFill from '../components/ScrollTextFill';
 
 
 
@@ -32,17 +31,23 @@ function Hero() {
     const heroHeight = hero.offsetHeight;
     const windowHeight = window.innerHeight;
     const maxScroll = heroHeight - windowHeight;
+    console.log(maxScroll)
 
     ScrollTrigger.create({
       trigger: '.hero-header',
       start: "bottom 80%",
       end: () => `${maxScroll}px`,
       onUpdate: (self) => {
+        // self.progress is 0 → 1 between start and end
+        // self.direction: 1 = scrolling down, -1 = scrolling up
+        let newProgress = (self.scroll() / maxScroll) * 2;
 
-        const scroll = self.scroll();
-        const newProgress = Math.min((scroll / maxScroll) * 1.5, 2);
-        setProgress(newProgress); // update state
+        // Reset to 0 if we scroll back before start
+        if (self.progress <= 0) {
+          newProgress = 0;
+        }
 
+        setProgress(newProgress);
       },
     });
   }, []);
@@ -88,25 +93,21 @@ function Hero() {
   }, [])
 
 
-
-
-
-
   return (
     <>
 
-      <section ref={heroRef} className='hero '>
+      <section ref={heroRef} className=' overflow-hidden relative w-full h-[175svh] bg-[#1b1a1a] '>
 
 
-<SvgBackground/>
-<div className='w-full h-full absolute top-0 left-0 backdrop-blur-[1.5px] '></div>
+        <SvgBackground />
+        <div className='w-full h-full absolute top-0 left-0 backdrop-blur-[1.5px] '></div>
 
-        <div className="hero-header ">
-          
-          <h1 className="tracking-[3px] translate-y-[-50%] text-[4rem] font-bold h-fit w-fit text-[#ffffff] text-shadow-[0_0_20px_#6e6eff80] relative ">YOU <br/> <span className='[-webkit-text-stroke:2px_#6e6eff] text-transparent '>IMAGINE</span></h1>
-          <img src={head} alt="3D Head" className='w-auto h-[85svh] drop-shadow-[0_0_30px_#6e6eff99] rounded-[50%]' />
-      <h1 className="tracking-[3px] translate-y-[50%] text-[4rem] font-bold h-fit w-fit text-[#ffffff] text-shadow-[0_0_20px_#6e6eff80] relative ">ME <br/> <span className='[-webkit-text-stroke:2px_#6e6eff] text-transparent'>CREATE </span></h1>
-   
+        <div className="hero-header text-center max-md:flex-col absolute w-full h-svh flex top-0 left-0 justify-center items-center gap-0.5 ">
+
+          <h1 className="-rotate-45 max-md:rotate-0 tracking-[4px] max-md:leading-[3rem] leading-[4.5rem] translate-y-[-50%] max-lg:text-[2.5rem] text-[4rem] font-bold h-fit w-fit text-[#ffffff] text-shadow-[0_0_20px_#5B4DF4] relative ">YOU <br /> <span className='[-webkit-text-stroke:2px_#5B4DF4] text-transparent '>IMAGINE</span><br /> IT </h1>
+          <img src={head} alt="3D Head" className='w-auto max-md:h-[35svh] max-lg:h-[50svh] h-[85svh] drop-shadow-[2px_2px_30px_#6e6eff] rounded-[50%]' />
+          <h1 className="rotate-45 max-md:rotate-0 max-md:leading-[3rem] tracking-[3px] leading-[4.5rem] translate-y-[50%] max-lg:text-[2.5rem] text-[4rem] font-bold h-fit w-fit text-[#ffffff] text-shadow-[0_0_20px_#5B4DF4] relative ">ME <br /> <span className='[-webkit-text-stroke:2px_#5B4DF4] text-transparent'>CREATE </span><br /> IT  </h1>
+
         </div>
 
 
@@ -136,24 +137,24 @@ function Hero() {
 
 
         </Canvas>
-        <div className="hero-content ">
+        <div className="  hero-content absolute bottom-0 left-0 h-[50svh] w-full flex items-center justify-center text-center  ">
 
-          <h2>
-            Lorem ipsum dolor sit amet consectetur
-            adipisicing elit.
-            Odit ab, sed possimus quibusdam
-            facere distinctio blanditiis a impedit eius
-            reiciendis illum adipisci deserunt?
-          </h2>
+
+
+          <ScrollTextFill className=" text-[5rem] w-[75%] font-Brier text-shadow-[0_0_10px_#5B4DF4] leading-[5rem] "
+            text={`YOUR IDEA TAKES\n <span class="highlight">FLIGHT</span>\nI BUILD THE\n <span class="highlight" >WINGS</span>`}
+  split="chars"
+  stagger={0.05}
+/>
 
         </div>
 
       </section>
-     
 
 
 
-  
+
+
     </>
   )
 }
