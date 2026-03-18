@@ -96,17 +96,17 @@ function Hero() {
   return (
     <>
 
-      <section ref={heroRef} className=' overflow-hidden relative w-full h-[175svh] bg-[#1b1a1a] '>
+      <section ref={heroRef} className=' overflow-hidden relative w-full h-[175svh] bg-(--dark-color) '>
 
 
         <SvgBackground />
-        <div className='w-full h-full absolute top-0 left-0 backdrop-blur-[1.5px] '></div>
+        <div className='w-full h-full absolute top-0 left-0 backdrop-blur-[2px] '></div>
 
-        <div className="hero-header text-center max-md:flex-col absolute w-full h-svh flex top-0 left-0 justify-center items-center gap-0.5 ">
+        <div className="hero-header font-(family-name:--font-poppins) text-center max-md:flex-col absolute w-full h-svh flex top-0 left-0 justify-center items-center gap-0.5 ">
 
-          <h1 className="-rotate-45 max-md:rotate-0 tracking-[4px] max-md:leading-[3rem] leading-[4.5rem] translate-y-[-50%] max-lg:text-[2.5rem] text-[4rem] font-bold h-fit w-fit text-[#ffffff] text-shadow-[0_0_20px_#5B4DF4] relative ">YOU <br /> <span className='[-webkit-text-stroke:2px_#5B4DF4] text-transparent '>IMAGINE</span><br /> IT </h1>
+          <h1 className="-rotate-45 max-md:rotate-0 tracking-[4px] max-md:leading-[3rem] leading-[4.5rem] translate-y-[-50%] max-lg:text-[2.5rem] text-[4rem] font-bold h-fit w-fit text-(--light-color) text-shadow-[0_0_20px_#5B4DF4] relative ">YOU <br /> <span className='[-webkit-text-stroke:2px_#5B4DF4] text-transparent '>IMAGINE</span><br /> IT </h1>
           <img src={head} alt="3D Head" className='w-auto max-md:h-[35svh] max-lg:h-[50svh] h-[85svh] drop-shadow-[2px_2px_30px_#6e6eff] rounded-[50%]' />
-          <h1 className="rotate-45 max-md:rotate-0 max-md:leading-[3rem] tracking-[3px] leading-[4.5rem] translate-y-[50%] max-lg:text-[2.5rem] text-[4rem] font-bold h-fit w-fit text-[#ffffff] text-shadow-[0_0_20px_#5B4DF4] relative ">ME <br /> <span className='[-webkit-text-stroke:2px_#5B4DF4] text-transparent'>CREATE </span><br /> IT  </h1>
+          <h1 className="rotate-45 max-md:rotate-0 max-md:leading-[3rem] tracking-[3px] leading-[4.5rem] translate-y-[50%] max-lg:text-[2.5rem] text-[4rem] font-bold h-fit w-fit text-(--light-color) text-shadow-[0_0_20px_#5B4DF4] relative ">ME <br /> <span className='[-webkit-text-stroke:2px_#5B4DF4] text-transparent'>CREATE </span><br /> IT  </h1>
 
         </div>
 
@@ -137,15 +137,17 @@ function Hero() {
 
 
         </Canvas>
-        <div className="  hero-content absolute bottom-0 left-0 h-[50svh] w-full flex items-center justify-center text-center  ">
+
+
+        <div className=" absolute bottom-0 left-0 h-[75svh] w-full flex items-center justify-center text-center text-(--light-color) font-(family-name:--font-bebas) font-bold">
 
 
 
-          <ScrollTextFill className=" text-[5rem] w-[75%] font-Brier text-shadow-[0_0_10px_#5B4DF4] leading-[5rem] "
+          <ScrollTextFill className=" text-[6rem] w-[75%]  text-shadow-[0_0_10px_#5B4DF4] leading-[6rem] "
             text={`YOUR IDEA TAKES\n <span class="highlight">FLIGHT</span>\nI BUILD THE\n <span class="highlight" >WINGS</span>`}
-  split="chars"
-  stagger={0.05}
-/>
+            split="chars"
+            stagger={0.05}
+          />
 
         </div>
 
