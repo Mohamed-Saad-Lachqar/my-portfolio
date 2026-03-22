@@ -115,7 +115,7 @@ export default function SvgBackground() {
         ref={svgRef}
         viewBox="0 0 1681 1056"
         preserveAspectRatio="xMidYMid slice"
-        className="absolute top-0 left-0 inset-0 w-full h-full  "
+        className="absolute top-0 left-0 inset-0 w-full h-full z-0 opacity-60 "
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
