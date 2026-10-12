@@ -9,6 +9,8 @@ import ScrollTextFill from '../components/ScrollTextFill';
 
 
 
+import Img from '../assets/2.png'
+import Img2 from '../assets/3.png'
 
 function Hero() {
 
@@ -122,15 +124,23 @@ function Hero() {
         </Canvas>
 
 
-        <div className=" absolute bottom-0 left-0 h-[75svh] w-full flex items-center justify-center text-center text-(--light-color) font-(family-name:--font-bebas) font-bold">
+        <div className=" absolute bottom-0 left-0 min-h-[75svh] w-full flex items-center justify-center text-center">
+
+          <div className='relative  flex items-center justify-center text-center text-(--dark-color) font-(family-name:--font-bebas) font-bold'>
+            <div  >
+              <img src={Img2} alt="" className='drop-shadow-[0_4px_6px_#5B4DF4] w-full h-full object-cover' />
+            </div>
 
 
-
-          <ScrollTextFill className=" max-md:text-[3rem] text-[6rem] w-[75%]  text-shadow-[0_0_10px_#5B4DF4] leading-[6rem] "
-            text={`YOUR IDEA TAKES\n <span class="highlight">FLIGHT</span>\nI BUILD THE\n <span class="highlight" >WINGS</span>`}
-            split="chars"
-            stagger={0.05}
-          />
+            <ScrollTextFill className=" max-md:text-[3rem] text-[6rem] w-[75%]  text-shadow-[0_0_10px_#5B4DF4] leading-[6rem] "
+              text={`YOUR IDEAS TAKE\n <span class="highlight">FLIGHTS</span>\nI BUILD THE\n <span class="highlight" >WINGS</span>`}
+              split="chars"
+              stagger={0.05}
+            />
+            <div  >
+              <img src={Img} alt="" className='drop-shadow-[0_4px_6px_#5B4DF4] w-full h-full object-cover' />
+            </div>
+          </div>
 
         </div>
 

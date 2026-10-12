@@ -5,7 +5,7 @@ import { vertexShader, fragmentShader } from "../shaders/heroshader"
 
 // 🔹 Config object
 const shaderConfig = {
-  color: "#1B1A1A",
+  color: "#B5BABE",
   spread: 2,
 }
 
