@@ -36,7 +36,7 @@ function App() {
   }, [])
 
   return (
-    <>
+    <div className=' overflow-hidden bg-(--light-color)'>
     <Hero/>
     <About/>
     <Skills/>
@@ -44,7 +44,7 @@ function App() {
     <Experiences/>
     <Projets/>
     <Contact/>
-    </>
+    </div>
   )
 }
 

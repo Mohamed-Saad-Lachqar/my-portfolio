@@ -117,7 +117,7 @@ export default function Projets() {
       <section ref={Spotlight} className=" relative overflow-hidden w-full min-h-svh flex justify-center items-center bg-(--light-color) text-(--dark-color) flex-col ">
 
 
-        <h1 className='text-center  text-[5rem] font-(family-name:--font-bebas) font-semibold ' ><span className='highlight' > some</span> of <span className='highlight' > my</span> work :</h1>
+        <h1 className='text-center  text-[5rem] max-md:text-[3rem] font-(family-name:--font-bebas) font-semibold ' ><span className='highlight' > some</span> of <span className='highlight' > my</span> work :</h1>
 
 
         {/*===========================================================================cards============================================================================================ */}

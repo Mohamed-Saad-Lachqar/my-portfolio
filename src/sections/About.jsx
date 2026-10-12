@@ -49,7 +49,7 @@ function About() {
       </svg>
       <div ref={aboutRef} className='p-[5rem] min-h-svh mt-[12rem] max-md:py-[1rem] ' >
 
-        <h1 className='text-center  text-[6rem] font-(family-name:--font-bebas) font-bold ' >who <span className='highlight' > am</span> I ?</h1>
+        <h1 className='text-center max-md:text-[3.5rem] text-[6rem] font-(family-name:--font-bebas) font-bold ' >who <span className='highlight' > am</span> I ?</h1>
 
         <div className="w-full mt-[1rem] max-md:mt-[1rem] flex-wrap-reverse  text-(--light-color) flex justify-center items-center gap-[3rem]">
 
@@ -60,7 +60,7 @@ function About() {
             start='top center'
             stagger={2}
           />
-          <div ref={blobRef} className=' w-[30rem] max-md:w-[18rem] overflow-hidden  aspect-square [border-radius:35%_65%_35%_65%/55%_41%_59%_45%]  border-[7px] border-transparent shadow-[0_0_10px_10px_#5B4DF4] border-solid ' >
+          <div ref={blobRef} className=' w-[30rem] max-md:w-[15rem] overflow-hidden  aspect-square [border-radius:35%_65%_35%_65%/55%_41%_59%_45%]  border-[7px] border-transparent shadow-[0_0_10px_10px_#5B4DF4] border-solid ' >
             <img src={MyImg} alt="" className='drop-shadow-[0_4px_6px_#5B4DF4] w-full h-full object-cover' />
           </div>
         </div>

@@ -29,7 +29,7 @@ function Experiences() {
     <>
       <section className=' w-full h-fit bg min-h-[120svh] bg-(--dark-color) relative flex justify-center items-center ' >
 
-        <div className='px-[5rem] pt-[5rem]  w-full h-full' >
+        <div className='px-[5rem] max-md:p-[2rem] pt-[5rem]  w-full h-full' >
           <LettersDrop text={`Profitional\nExperience`} className='text-[5.5rem] max-md:text-[2.5rem] w-full text-center text-(--light-color) font-bold ' />
 
           <div className='py-2 mt-[50px] w-full relative z-10 h-full flex flex-wrap justify-center items-center gap-[2.5rem]' >
