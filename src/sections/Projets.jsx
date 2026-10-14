@@ -16,7 +16,7 @@ export default function Projets() {
     [120, -160],
     [-160, 40],
     [20, 30],
-    [-50, -130],
+    [-50, -140],
   ];
 
   const CardsRef = useRef([]);
@@ -37,7 +37,7 @@ export default function Projets() {
       onUpdate: (self) => {
 
         const progress = self.progress;
-        const initialRotaions = [5, -3, 3.5, -1, 4];
+        const initialRotaions = [5, -3, 3.5, -1, 5];
         const phaseOneStartOffsets = [0, 0.1, 0.2, 0.3,0.4];
 
         Cards.forEach((Card, index) => {
