@@ -1,171 +1,216 @@
-import React, { useEffect, useRef, useState } from 'react'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Prj1 from '../assets/prj1.png'
-import Prj2 from '../assets/prj2.png'
-import Prj3 from '../assets/prj3.png'
-import Prj4 from '../assets/prj4.png'
-import Prj5 from '../assets/prj5.png'
+
+import { useRef, useState } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import { projects } from "../data/projects";
+import ProjectModal from "../components/ProjectModal";
+
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function Projets() {
-
-  const CardsFinalPos = [
-    [-200, -160],
-    [120, -160],
-    [-160, 40],
-    [20, 30],
-    [-50, -140],
-  ];
+  const [selectedProject, setSelectedProject] = useState(null);
 
   const CardsRef = useRef([]);
   const Spotlight = useRef();
 
+  const CardsFinalPos = [
+    [-200, -160],
+    [-50, -140],
+    [-160, 40],
+    [20, 30],
+    [120, -160],
+  ];
 
-  useGSAP(() => {
+  useGSAP(
+    () => {
+      const Cards = CardsRef.current;
 
-    const Cards = CardsRef.current;
+      const initialRotations = [5, -3, 3.5, -1, 5];
+      const phaseOneStartOffsets = [0, 0.1, 0.2, 0.3, 0.4];
+      const phaseTwoStartOffsets = [0.5, 0.55, 0.6, 0.65, 0.7];
 
-    ScrollTrigger.create({
-      trigger: Spotlight.current,
-      start: "top top",
-      end: `+${window.innerHeight * 4}px`,
-      pin: true,
-      pinSpacing: true,
-      scrub: 1,
-      onUpdate: (self) => {
+      ScrollTrigger.create({
+        trigger: Spotlight.current,
+        start: "top top",
+        end: `+${window.innerHeight * 4}px`,
+        pin: true,
+        pinSpacing: true,
+        scrub: 1,
 
-        const progress = self.progress;
-        const initialRotaions = [5, -3, 3.5, -1, 5];
-        const phaseOneStartOffsets = [0, 0.1, 0.2, 0.3,0.4];
+        onUpdate: (self) => {
+          const progress = self.progress;
 
-        Cards.forEach((Card, index) => {
+          Cards.forEach((card, index) => {
+            if (!card) return;
 
-          const initialRotaion = initialRotaions[index];
-          const phase1Start = phaseOneStartOffsets[index];
-          const phase1End = Math.min(phase1Start + (0.5 - phase1Start) * 0.9, 0.5);
+            const initialRotation = initialRotations[index];
+            const phaseOneStart = phaseOneStartOffsets[index];
 
-          let x = -50;
-          let y, rotation;
+            const phaseOneEnd = Math.min(
+              phaseOneStart +
+                (0.5 - phaseOneStart) * 0.9,
+              0.5
+            );
 
+            let x = -50;
+            let y;
+            let rotation;
 
+            // Phase 1: cards rise into view
+            if (progress < phaseOneStart) {
+              y = 200;
+              rotation = initialRotation;
+            } else if (progress <= 0.5) {
+              let phaseOneProgress;
 
-          if (progress < phase1Start) {
-            y = 200;
-            rotation = initialRotaion;
+              if (progress >= phaseOneEnd) {
+                phaseOneProgress = 1;
+              } else {
+                const linearProgress =
+                  (progress - phaseOneStart) /
+                  (phaseOneEnd - phaseOneStart);
 
-          } else if (progress <= 0.5) {
-            let phase1progress;
-            if (progress >= phase1End) {
-              phase1progress = 1;
+                phaseOneProgress =
+                  1 - Math.pow(1 - linearProgress, 3);
+              }
+
+              y = 200 - phaseOneProgress * 250;
+              rotation = initialRotation;
             } else {
-              const linearProgress = (progress - phase1Start) / (phase1End - phase1Start);
-              phase1progress = 1 - Math.pow(1 - linearProgress, 3)
-            }
-            y = 200 - phase1progress * 250;
-            rotation = initialRotaion;
-
-          } else {
-            y = -50;
-            rotation = initialRotaion;
-          }
-          /*=======================phase2=================== */
-          const phaseTwoStartOffsets = [0.5, 0.55, 0.6, 0.65,0.7];
-          const phase2Start = phaseTwoStartOffsets[index]
-          const phase2End = Math.min(phase2Start + (0.95 - phase2Start) * 0.9, 0.95);
-
-          const finalX = CardsFinalPos[index][0];
-          const finalY = CardsFinalPos[index][1];
-
-          if (progress >= phase2Start && progress <= 0.95) {
-
-            let phase2progress;
-
-            if (progress >= phase2End) {
-              phase2progress = 1;
-            } else {
-
-              const linearProgress = (progress - phase2Start) / (phase2End - phase2Start);
-              phase2progress = 1 - Math.pow(1 - linearProgress, 3)
+              y = -50;
+              rotation = initialRotation;
             }
 
-            x = -50 + (finalX + 50) * phase2progress;
-            y = -50 + (finalY + 50) * phase2progress;
-            rotation = initialRotaion * (1 - phase2progress);
-          } else if (progress > 0.95) {
-            x = finalX;
-            y = finalY;
-            rotation = 0;
+            // Phase 2: cards move into their final positions
+            const phaseTwoStart = phaseTwoStartOffsets[index];
 
-          }
+            const phaseTwoEnd = Math.min(
+              phaseTwoStart +
+                (0.95 - phaseTwoStart) * 0.9,
+              0.95
+            );
 
-          gsap.set(Card, {
-            transform: `translate(${x}%,${y}%) rotate(${rotation}deg)`,
-          })
+            const [finalX, finalY] = CardsFinalPos[index];
 
+            if (
+              progress >= phaseTwoStart &&
+              progress <= 0.95
+            ) {
+              let phaseTwoProgress;
 
+              if (progress >= phaseTwoEnd) {
+                phaseTwoProgress = 1;
+              } else {
+                const linearProgress =
+                  (progress - phaseTwoStart) /
+                  (phaseTwoEnd - phaseTwoStart);
 
-        })
-      }
-    })
-  })
+                phaseTwoProgress =
+                  1 - Math.pow(1 - linearProgress, 3);
+              }
 
+              x = -50 + (finalX + 50) * phaseTwoProgress;
+              y = -50 + (finalY + 50) * phaseTwoProgress;
+
+              rotation =
+                initialRotation * (1 - phaseTwoProgress);
+            } else if (progress > 0.95) {
+              x = finalX;
+              y = finalY;
+              rotation = 0;
+            }
+
+            gsap.set(card, {
+              transform:
+                `translate(${x}%, ${y}%) rotate(${rotation}deg)`,
+            });
+          });
+        },
+      });
+    },
+    { scope: Spotlight }
+  );
 
   return (
     <>
-      <section ref={Spotlight} className=" relative overflow-hidden w-full min-h-svh flex justify-center items-center bg-(--light-color) text-(--dark-color) flex-col ">
+      <section
+        ref={Spotlight}
+        className="relative flex min-h-svh w-full
+          flex-col items-center justify-center
+          overflow-hidden bg-(--light-color)
+          text-(--dark-color)"
+      >
+        <h1
+          className="text-center text-[5rem]
+            font-(family-name:--font-bebas) font-semibold
+            max-md:text-[3rem]"
+        >
+          <span className="highlight">some</span> of{" "}
+          <span className="highlight">my</span> work :
+        </h1>
 
+        {/* Animated project cards */}
+        <div className="absolute left-0 top-0 h-full w-full">
+          {projects.map((project, index) => (
+            <div
+              key={project.id}
+              ref={(element) => {
+                CardsRef.current[index] = element;
+              }}
+              role="button"
+              tabIndex={0}
+              aria-label={`View ${project.title} project details`}
+              onClick={() => setSelectedProject(project)}
+              onKeyDown={(event) => {
+                if (
+                  event.key === "Enter" ||
+                  event.key === " "
+                ) {
+                  event.preventDefault();
+                  setSelectedProject(project);
+                }
+              }}
+              className="group absolute left-[50%] top-[50%]
+                aspect-[7/4] w-[20rem] cursor-pointer
+                overflow-hidden rounded-2xl
+                translate-x-[-50%] translate-y-[200%]
+                focus-visible:outline-2
+                focus-visible:outline-[#a652f4]"
+            >
+              {/* Purple hover overlay */}
+              <div
+                className="absolute bottom-0 left-0 z-10
+                  flex h-0 w-full items-center justify-center
+                  overflow-hidden bg-gradient-to-b
+                  from-black/80 to-[#a652f4]
+                  text-(--light-color)
+                  duration-[.5s] group-hover:h-full"
+              >
+                <h2 className="text-xl font-semibold">
+                  See more 
+                </h2>
+              </div>
 
-        <h1 className='text-center  text-[5rem] max-md:text-[3rem] font-(family-name:--font-bebas) font-semibold ' ><span className='highlight' > some</span> of <span className='highlight' > my</span> work :</h1>
-
-
-        {/*===========================================================================cards============================================================================================ */}
-        <div className="absolute top-0 left-0 w-full h-full  ">
-
-
-          <div ref={(el) => (CardsRef.current[0] = el)} className="group absolute top-[50%] left-[50%] overflow-hidden w-[20rem] rounded-2xl aspect-[7/4] translate-x-[-50%] translate-y-[200%]">
-            <div className="absolute w-full h-0 overflow-hidden z-10 duration-[.5s] group-hover:h-full left-0 bottom-0 bg-gradient-to-b from-black/80 to-[#a652f4] text-(--light-color) flex justify-center items-center">
-              <h1>see more</h1>
+              {/* Project image */}
+              <img
+                src={project.image}
+                alt={`${project.title} preview`}
+                draggable="false"
+                className="h-full w-full object-cover
+                  duration-[.5s] group-hover:scale-110"
+              />
             </div>
-            <img src={Prj1} alt="" className='group-hover:scale-110 duration-[.5s] object-cover w-full h-full' />
-          </div>
-
-
-          <div ref={(el) => (CardsRef.current[1] = el)} className="group absolute top-[50%] left-[50%] overflow-hidden w-[20rem] rounded-2xl aspect-[7/4] translate-x-[-50%] translate-y-[200%]">
-            <div className="absolute w-full h-0 z-10 overflow-hidden duration-[.5s] group-hover:h-full left-0 bottom-0 bg-gradient-to-b from-black/80 to-[#a652f4] text-(--light-color) flex justify-center items-center">
-              <h1>see more</h1>
-            </div>
-            <img src={Prj2} alt="" className='group-hover:scale-110 ease duration-[.4s] object-cover w-full h-full' />
-          </div>
-
-
-          <div ref={(el) => (CardsRef.current[2] = el)} className="group absolute top-[50%] left-[50%] overflow-hidden w-[20rem] rounded-2xl aspect-[7/4] translate-x-[-50%] translate-y-[200%]">
-            <div className="absolute w-full h-0 z-10 overflow-hidden duration-[.5s] group-hover:h-full left-0 bottom-0 bg-gradient-to-b from-black/80 to-[#a652f4] text-(--light-color) flex justify-center items-center">
-              <h1>see more</h1>
-            </div>
-            <img src={Prj3} alt="" className='group-hover:scale-110 ease duration-[.4s] object-cover w-full h-full' />
-          </div>
-
-
-          <div ref={(el) => (CardsRef.current[3] = el)} className="group absolute top-[50%] left-[50%] overflow-hidden w-[20rem] rounded-2xl aspect-[7/4] translate-x-[-50%] translate-y-[200%]">
-            <div className="absolute w-full h-0 z-10 overflow-hidden duration-[.5s] group-hover:h-full left-0 bottom-0 bg-gradient-to-b from-black/80 to-[#a652f4] text-(--light-color) flex justify-center items-center">
-              <h1>see more</h1>
-            </div>
-            <img src={Prj4} alt="" className='group-hover:scale-110 ease duration-[.4s] object-cover w-full h-full' />
-          </div>
-
-
-          <div ref={(el) => (CardsRef.current[4] = el)} className="group absolute top-[50%] left-[50%] overflow-hidden w-[20rem] rounded-2xl aspect-[7/4] translate-x-[-50%] translate-y-[200%]">
-            <div className="absolute w-full z-10 h-0 overflow-hidden ease duration-[.4s] group-hover:h-full left-0 bottom-0 bg-gradient-to-b from-black/80 to-[#a652f4] text-(--light-color) flex justify-center items-center">
-              <h1>see more</h1>
-            </div>
-            <img src={Prj5} alt="" className='group-hover:scale-110 ease duration-[.4s] object-cover w-full h-full' />
-          </div>
-
+          ))}
         </div>
-
       </section>
+
+      {/* Keep the modal outside the pinned, overflow-hidden section */}
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </>
-  )
+  );
 }
