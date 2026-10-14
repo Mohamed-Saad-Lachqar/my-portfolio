@@ -34,7 +34,7 @@ export const projects = [
     image: Prj3,
     description:
       "A responsive web application for discovering and exploring books using an external API. It dynamically retrieves book information and presents it through an interactive interface designed to make browsing and discovering books smooth and engaging.",
-    videoId: "",
+    videoId: "NlQF509aZdA",
     technologies: ["React", "JavaScript", "API Integration", "Tailwind CSS"],
     liveDemo: 'https://mohamed-saad-lachqar.github.io/MSLbooks/',
     sourceCode: 'https://github.com/Mohamed-Saad-Lachqar/MSLbooks',
