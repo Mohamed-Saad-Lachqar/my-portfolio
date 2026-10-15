@@ -7,6 +7,7 @@ import ScrollTextFill from '../components/ScrollTextFill';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import FallTxt from '../components/FallTxt';
 
 import MyImg from '../assets/4.png';
 
@@ -39,38 +40,38 @@ export default function Skills() {
     const container = useRef(null);
 
     useGSAP(
-    () => {
-        const imageCards = gsap.utils.toArray(
-            'div:has(> img)',
-            container.current
-        );
-
-        imageCards.forEach((card) => {
-            gsap.fromTo(
-                card,
-                {
-                    opacity: 0,
-                    y: 40,
-                },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: card,
-                        start: 'top 80%',
-                        end: 'bottom 15%',
-                        toggleActions: 'play reverse play reverse',
-                    },
-                }
+        () => {
+            const imageCards = gsap.utils.toArray(
+                'div:has(> img)',
+                container.current
             );
-        });
-    },
-    {
-        scope: container,
-    }
-);
+
+            imageCards.forEach((card) => {
+                gsap.fromTo(
+                    card,
+                    {
+                        opacity: 0,
+                        y: 40,
+                    },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: card,
+                            start: 'top 80%',
+                            end: 'bottom 15%',
+                            toggleActions: 'play reverse play reverse',
+                        },
+                    }
+                );
+            });
+        },
+        {
+            scope: container,
+        }
+    );
 
     return (
         <section
@@ -90,10 +91,12 @@ export default function Skills() {
             </svg>
 
             <div className="p-[5rem] max-md:p-[2rem] min-h-svh mt-[12rem] max-md:mt-[3rem] max-md:py-[1rem] w-full">
-                <h1 className="text-center w-full max-md:text-[2.6rem] text-[5rem] font-(family-name:--font-bebas) font-semibold mt-[50px]">
-                    skills <span className="highlight">and</span> thechnologies :
-                </h1>
 
+                <FallTxt>
+                    <h1 className="text-center w-full max-md:text-[2.6rem] text-[5rem] font-(family-name:--font-bebas) font-semibold mt-[50px]">
+                        skills <span className="highlight">and</span> thechnologies :
+                    </h1>
+                </FallTxt>
                 <div className="w-full flex-col text-(--dark-color) flex justify-center items-center gap-[3rem]">
                     <div className="w-[35rem] max-md:w-[15rem] overflow-hidden aspect-square">
                         <img
@@ -105,9 +108,11 @@ export default function Skills() {
 
                     {/* Programming languages */}
                     <div className="w-full">
-                        <h1 className="text-[3rem] w-full max-md:text-[2rem] font-(family-name:--font-bebas) font-bold relative after:content-[''] after:block after:w-[100%] after:h-[5px] after:bg-violet-600">
-                            Programming languages :
-                        </h1>
+                        <FallTxt>
+                            <h1 className="text-[3rem] w-full max-md:text-[2rem] font-(family-name:--font-bebas) font-bold relative after:content-[''] after:block after:w-[100%] after:h-[5px] after:bg-violet-600">
+                                Programming languages :
+                            </h1>
+                        </FallTxt>
 
                         <div className="flex flex-wrap">
                             <div className="w-[100px] p-[10px] m-[25px] flex justify-center items-center border-[7px] border-[#ffffff5f] shadow-[0_0_15px_6px_#5B4DF4] rounded-[15px] hover:scale-110 border-solid aspect-square">
@@ -131,10 +136,11 @@ export default function Skills() {
                         </div>
 
                         {/* Frameworks and libraries */}
-                        <h1 className="text-[3rem] max-md:text-[2rem] font-(family-name:--font-bebas) font-bold relative after:content-[''] after:block after:w-[100%] after:h-[5px] after:bg-violet-600">
-                            Frameworks and libraries :
-                        </h1>
-
+                        <FallTxt>
+                            <h1 className="text-[3rem] max-md:text-[2rem] font-(family-name:--font-bebas) font-bold relative after:content-[''] after:block after:w-[100%] after:h-[5px] after:bg-violet-600">
+                                Frameworks and libraries :
+                            </h1>
+                        </FallTxt>
                         <div className="flex flex-wrap">
                             <div className="w-[100px] p-[10px] m-[25px] flex justify-center items-center border-[7px] border-[#ffffff5f] shadow-[0_0_15px_6px_#5B4DF4] rounded-[15px] hover:scale-110 border-solid aspect-square">
                                 <img src={Reacticon} alt="React" className="drop-shadow-[0_4px_6px_#1B1A1A] object-cover" />
@@ -154,10 +160,11 @@ export default function Skills() {
                         </div>
 
                         {/* Databases */}
-                        <h1 className="text-[3rem] max-md:text-[2rem] font-(family-name:--font-bebas) font-bold relative after:content-[''] after:block after:w-[100%] after:h-[5px] after:bg-violet-600">
-                            Databases :
-                        </h1>
-
+                        <FallTxt>
+                            <h1 className="text-[3rem] max-md:text-[2rem] font-(family-name:--font-bebas) font-bold relative after:content-[''] after:block after:w-[100%] after:h-[5px] after:bg-violet-600">
+                                Databases :
+                            </h1>
+                        </FallTxt>
                         <div className="flex flex-wrap">
                             <div className="w-[100px] p-[10px] m-[25px] flex justify-center items-center border-[7px] border-[#ffffff5f] shadow-[0_0_15px_6px_#5B4DF4] rounded-[15px] hover:scale-110 border-solid aspect-square">
                                 <img src={Mysql} alt="MySQL" className="drop-shadow-[0_4px_6px_#1B1A1A] object-cover" />
@@ -171,10 +178,12 @@ export default function Skills() {
                         </div>
 
                         {/* Tools and platforms */}
-                        <h1 className="text-[3rem] max-md:text-[2rem] font-(family-name:--font-bebas) font-bold relative after:content-[''] after:block after:w-[100%] after:h-[5px] after:bg-violet-600">
-                            Tools and platforms :
-                        </h1>
+                        <FallTxt>
 
+                            <h1 className="text-[3rem] max-md:text-[2rem] font-(family-name:--font-bebas) font-bold relative after:content-[''] after:block after:w-[100%] after:h-[5px] after:bg-violet-600">
+                                Tools and platforms :
+                            </h1>
+                        </FallTxt>
                         <div className="flex flex-wrap">
                             <div className="w-[100px] p-[10px] m-[25px] flex justify-center items-center border-[7px] border-[#ffffff5f] shadow-[0_0_15px_6px_#5B4DF4] rounded-[15px] hover:scale-110 border-solid aspect-square">
                                 <img src={Wordpress} alt="WordPress" className="drop-shadow-[0_4px_6px_#1B1A1A] object-cover" />

@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
+import FallTxt from '../components/FallTxt';
 import { projects } from "../data/projects";
 import ProjectModal from "../components/ProjectModal";
 
@@ -50,7 +50,7 @@ export default function Projets() {
 
             const phaseOneEnd = Math.min(
               phaseOneStart +
-                (0.5 - phaseOneStart) * 0.9,
+              (0.5 - phaseOneStart) * 0.9,
               0.5
             );
 
@@ -88,7 +88,7 @@ export default function Projets() {
 
             const phaseTwoEnd = Math.min(
               phaseTwoStart +
-                (0.95 - phaseTwoStart) * 0.9,
+              (0.95 - phaseTwoStart) * 0.9,
               0.95
             );
 
@@ -142,14 +142,18 @@ export default function Projets() {
           overflow-hidden bg-(--light-color)
           text-(--dark-color)"
       >
-        <h1
-          className="text-center text-[5rem]
+        <FallTxt>
+
+          <h1
+            className="text-center text-[5rem]
             font-(family-name:--font-bebas) font-semibold
             max-md:text-[3rem]"
-        >
-          <span className="highlight">some</span> of{" "}
-          <span className="highlight">my</span> work :
-        </h1>
+          >
+            <span className="highlight">some</span> of{" "}
+            <span className="highlight">my</span> work :
+          </h1>
+        </FallTxt>
+
 
         {/* Animated project cards */}
         <div className="absolute left-0 top-0 h-full w-full">
@@ -189,7 +193,7 @@ export default function Projets() {
                   duration-[.5s] group-hover:h-full"
               >
                 <h2 className="text-xl font-semibold">
-                  See more 
+                  See more
                 </h2>
               </div>
 

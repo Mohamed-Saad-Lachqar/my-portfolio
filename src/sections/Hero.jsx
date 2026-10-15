@@ -90,7 +90,9 @@ function Hero() {
         <div className="hero-header font-(family-name:--font-poppins) text-center max-md:flex-col absolute w-full h-svh flex top-0 left-0 justify-center items-center gap-0.5 ">
 
           <h1 className="rotate-45 max-md:rotate-0 tracking-[4px] max-md:leading-[3rem] leading-[4.5rem] translate-y-[50%] max-md:translate-y-[-10%]  max-lg:text-[2.5rem] text-[4rem] font-bold h-fit w-fit text-(--light-color) text-shadow-[0_0_20px_#5B4DF4] relative ">YOU <br /> <span className='[-webkit-text-stroke:2px_#fafafa] text-transparent '>IMAGINE</span><br /> IT </h1>
+
           <img src={head} alt="3D Head" className='w-auto max-md:h-[35svh] max-lg:h-[50svh] h-[85svh] drop-shadow-[2px_2px_30px_#6e6eff] rounded-[50%]' />
+          
           <h1 className="-rotate-45 max-md:rotate-0 max-md:leading-[3rem] tracking-[3px] leading-[4.5rem] translate-y-[50%] max-md:translate-y-[10%] max-lg:text-[2.5rem] text-[4rem] font-bold h-fit w-fit text-(--light-color) text-shadow-[0_0_20px_#5B4DF4] relative ">ME <br /> <span className='[-webkit-text-stroke:2px_#fafafa] text-transparent'>CREATE </span><br /> IT  </h1>
 
         </div>
